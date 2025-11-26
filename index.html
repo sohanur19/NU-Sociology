@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NU Online Sociology</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-app-bar">
+        <span class="material-symbols-outlined menu-icon" onclick="toggleSidebar()">menu</span>
+        <h1>NU Online Sociology</h1>
+        <span class="material-symbols-outlined search-icon" onclick="navigate('search')">search</span>
+    </header>
+
+    <aside id="nav-sidebar" class="navigation-rail">
+        <div class="nav-item" onclick="navigate('home')">
+            <span class="material-symbols-outlined">home</span>
+            <span class="label">হোম</span>
+        </div>
+        <div class="nav-item" onclick="navigate('1st Year')">
+            <span class="material-symbols-outlined">school</span>
+            <span class="label">১ম বর্ষ</span>
+        </div>
+        <div class="nav-item" onclick="navigate('2nd Year')">
+            <span class="material-symbols-outlined">school</span>
+            <span class="label">২য় বর্ষ</span>
+        </div>
+        <div class="nav-item" onclick="navigate('3rd Year')">
+            <span class="material-symbols-outlined">school</span>
+            <span class="label">৩য় বর্ষ</span>
+        </div>
+        <div class="nav-item" onclick="navigate('4th Year')">
+            <span class="material-symbols-outlined">school</span>
+            <span class="label">৪র্থ বর্ষ</span>
+        </div>
+    </aside>
+
+    <main id="main-content">
+        <div id="content-container">
+            <div class="loader">ডাটা লোড হচ্ছে...</div>
+        </div>
+    </main>
+
+    <nav class="bottom-navigation">
+        <div class="nav-item" onclick="navigate('home')">
+            <span class="material-symbols-outlined">home</span>
+            <span class="label">হোম</span>
+        </div>
+        <div class="nav-item" onclick="navigate('1st Year')">
+            <span class="material-symbols-outlined">school</span>
+            <span class="label">বর্ষসমূহ</span>
+        </div>
+        <div class="nav-item" onclick="navigate('search')">
+            <span class="material-symbols-outlined">search</span>
+            <span class="label">অনুসন্ধান</span>
+        </div>
+    </nav>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
