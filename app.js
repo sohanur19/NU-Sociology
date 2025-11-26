@@ -62,7 +62,7 @@ async function loadData() {
         // ত্রুটির প্রকারভেদের উপর ভিত্তি করে আরও নির্দিষ্ট বার্তা
         let errorMessage = error.message;
         if (errorMessage.includes('Permission denied')) {
-            errorMessage = 'অনুমতি অস্বীকার করা হয়েছে। অনুগ্রহ করে Firebase Realtime Database-এর Rules (নিয়মাবলী)-এ `read: true` সেট করুন।';
+            errorMessage = 'অনুমতি অস্বীকার করা হয়েছে। অনুগ্রহ করে Firebase Realtime Database-এর **Rules (নিয়মাবলী)**-এ `read: true` সেট করুন।';
         } else if (errorMessage.includes('Failed to fetch')) {
             errorMessage = 'নেটওয়ার্ক সংযোগ সমস্যা বা ভুল `databaseURL`। আপনার সংযোগ এবং কনফিগারেশন যাচাই করুন।';
         }
@@ -74,7 +74,7 @@ async function loadData() {
             <ol>
                 <li>Firebase কনসোলে যান -> Realtime Database -> **Rules** ট্যাবে যান।</li>
                 <li>নিয়মাবলী পরিবর্তন করে নিশ্চিত করুন যে <code>"read": true</code> সেট করা আছে। যেমন:
-                    <pre style="background-color: #eee; padding: 10px; border-radius: 5px;"><code>{
+                    <pre style="background-color: #eee; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>{
   "rules": {
     ".read": "true",
     ".write": "false" 
@@ -460,7 +460,7 @@ window.togglePanel = function(headerElement) {
     if (content.classList.contains('open')) {
         icon.innerText = 'expand_less';
         // Set max-height for smooth transition (1000px is arbitrary but high enough)
-        content.style.maxHeight = '1000px'; 
+        content.style.maxHeight = content.scrollHeight + "px"; // Use scrollHeight for dynamic height
     } else {
         icon.innerText = 'expand_more';
         // Reset max-height to 0 to trigger close transition
@@ -482,8 +482,6 @@ window.onhashchange = function() {
         } else if (view.includes('Year')) {
             navigate(view);
         } else if (view === 'search') {
-            // Need to handle search query if present in hash, but current hash logic doesn't include it.
-            // Keeping it simple and just navigating to the search page.
             navigate(view);
         } else {
             navigate('home');
