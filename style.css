@@ -1,0 +1,297 @@
+/* --- Material 3 Color Palette (Emulation) --- */
+:root {
+    --primary: #6750A4; /* Primary Color (Violet) */
+    --on-primary: #FFFFFF;
+    --primary-container: #EADDFF;
+    --on-primary-container: #21005D;
+    --surface: #FFFBFE;
+    --on-surface: #1C1B1F;
+    --surface-container-high: #ECE6F0; /* Used for elevated cards */
+    --outline: #79747E;
+    --background: #FEF7FF;
+    --font-bengali: 'Noto Sans Bengali', sans-serif;
+    --max-mobile-width: 600px;
+}
+
+/* Base Styles & Typography */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-bengali);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--on-surface);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+/* --- Top App Bar (Android Header) --- */
+.top-app-bar {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Elevated feel */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.top-app-bar h1 {
+    flex-grow: 1;
+    font-size: 1.5rem;
+    margin: 0;
+}
+.menu-icon, .search-icon {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+.menu-icon:hover, .search-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Navigation Rail (Desktop/Tablet) & Sidebar (Mobile Drawer) --- */
+.navigation-rail {
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column;
+    width: 80px;
+    padding: 12px 4px;
+    background-color: var(--surface);
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    height: 100%;
+    z-index: 50;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border-radius: 16px;
+    color: var(--on-surface);
+}
+.nav-item:hover {
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+}
+.nav-item .material-symbols-outlined {
+    font-size: 24px;
+}
+.nav-item .label {
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* Mobile Sidebar (Drawer emulation) */
+@media (max-width: 600px) {
+    .navigation-rail {
+        display: flex;
+        position: fixed;
+        left: -250px; /* Hidden off-screen */
+        width: 250px;
+        transition: left 0.3s ease;
+        padding-top: 60px; /* Clearance for top app bar */
+        box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+    }
+    .navigation-rail.open {
+        left: 0;
+    }
+    .navigation-rail .nav-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 12px 16px;
+    }
+    .navigation-rail .nav-item .label {
+        font-size: 1rem;
+        margin-left: 16px;
+    }
+}
+
+
+/* --- Main Content Layout --- */
+main {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+#content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 80px; /* Space for bottom nav on mobile */
+}
+
+/* --- Bottom Navigation Bar (Mobile Only) --- */
+.bottom-navigation {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background-color: var(--surface);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+.bottom-navigation .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
+    color: var(--outline);
+}
+.bottom-navigation .nav-item.active {
+    color: var(--primary);
+}
+.bottom-navigation .nav-item:hover {
+    background-color: var(--surface-container-high);
+}
+
+/* --- Material Cards (Elevated Surface) --- */
+.material-card {
+    background-color: var(--surface-container-high);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.material-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Course Grid Layout (Desktop) --- */
+.course-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* --- Tabs for Course Details --- */
+.tab-bar {
+    display: flex;
+    border-bottom: 2px solid var(--outline);
+    margin-bottom: 20px;
+}
+.tab-button {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--outline);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+.tab-button.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+.tab-content-item {
+    display: none;
+}
+.tab-content-item.active {
+    display: block;
+}
+
+/* --- Expansion Panel/Accordion (Questions) --- */
+.expansion-panel {
+    border: 1px solid var(--outline);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background-color: var(--surface);
+}
+.panel-header {
+    padding: 12px 16px;
+    background-color: var(--surface-container-high);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+.panel-content {
+    padding: 0 16px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+.panel-content.open {
+    max-height: 1000px; /* Large enough to show all content */
+    padding: 16px;
+}
+.question-item {
+    margin-bottom: 8px;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--outline);
+}
+.question-item:last-child {
+    border-bottom: none;
+}
+.question-item strong {
+    color: var(--primary);
+}
+
+
+/* --- Responsiveness: Desktop Layout (Media Query) --- */
+@media (min-width: 601px) {
+    /* Main body layout adjusted for sidebar */
+    body {
+        flex-direction: row;
+    }
+    
+    /* Top app bar adjustment */
+    .top-app-bar {
+        position: static;
+        width: calc(100% - 80px); /* Adjust for fixed navigation rail */
+        margin-left: 80px;
+    }
+    .top-app-bar .menu-icon {
+        display: none; /* Hide menu icon on desktop */
+    }
+
+    /* Navigation Rail becomes permanent */
+    .navigation-rail {
+        display: flex;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 80px;
+    }
+
+    /* Main content padding for fixed sidebar */
+    main {
+        margin-left: 80px;
+        width: calc(100% - 80px);
+    }
+    
+    /* Hide bottom navigation bar */
+    .bottom-navigation {
+        display: none;
+    }
+
+    /* Course Grid on Desktop */
+    .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    /* Larger Content Padding */
+    #content-container {
+        padding: 30px;
+    }
+}
