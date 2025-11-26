@@ -36,178 +36,164 @@ h1, h2, h3 {
 
 /* --- Top App Bar (Android Header) --- */
 .top-app-bar {
-    background-color: var(--primary);
-    color: var(--on-primary);
-    padding: 16px;
+    background-color: var(--surface);
+    color: var(--on-surface);
+    padding: 0 16px;
+    height: 64px;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Elevated feel */
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 500;
 }
+
 .top-app-bar h1 {
+    font-size: 1.25rem;
     flex-grow: 1;
-    font-size: 1.5rem;
+    text-align: center;
     margin: 0;
 }
-.menu-icon, .search-icon {
+
+.top-app-bar .menu-icon,
+.top-app-bar .search-icon {
     cursor: pointer;
     padding: 8px;
-    border-radius: 50%;
-}
-.menu-icon:hover, .search-icon:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-/* --- Navigation Rail (Desktop/Tablet) & Sidebar (Mobile Drawer) --- */
-.navigation-rail {
-    display: none; /* Hidden by default on mobile */
-    flex-direction: column;
-    width: 80px;
-    padding: 12px 4px;
-    background-color: var(--surface);
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    height: 100%;
-    z-index: 50;
-}
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px 0;
-    margin-bottom: 4px;
-    cursor: pointer;
-    border-radius: 16px;
-    color: var(--on-surface);
-}
-.nav-item:hover {
-    background-color: var(--primary-container);
-    color: var(--on-primary-container);
-}
-.nav-item .material-symbols-outlined {
-    font-size: 24px;
-}
-.nav-item .label {
-    font-size: 0.75rem;
-    margin-top: 4px;
-}
-
-/* Mobile Sidebar (Drawer emulation) */
-@media (max-width: 600px) {
-    .navigation-rail {
-        display: flex;
-        position: fixed;
-        left: -250px; /* Hidden off-screen */
-        width: 250px;
-        transition: left 0.3s ease;
-        padding-top: 60px; /* Clearance for top app bar */
-        box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
-    }
-    .navigation-rail.open {
-        left: 0;
-    }
-    .navigation-rail .nav-item {
-        flex-direction: row;
-        justify-content: flex-start;
-        padding: 12px 16px;
-    }
-    .navigation-rail .nav-item .label {
-        font-size: 1rem;
-        margin-left: 16px;
-    }
-}
-
-
-/* --- Main Content Layout --- */
-main {
+/* --- Main Content Area --- */
+#main-content {
+    /* বটম নেভিগেশনের জন্য অতিরিক্ত প্যাডিং সরানো হয়েছে */
+    padding: 16px; 
     flex-grow: 1;
-    padding: 20px;
+    width: 100%;
 }
 
-#content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-bottom: 80px; /* Space for bottom nav on mobile */
-}
-
-/* --- Bottom Navigation Bar (Mobile Only) --- */
-.bottom-navigation {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 56px;
-    background-color: var(--surface);
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-.bottom-navigation .nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 0;
-    color: var(--outline);
-}
-.bottom-navigation .nav-item.active {
+.loader {
+    text-align: center;
+    padding: 50px;
     color: var(--primary);
-}
-.bottom-navigation .nav-item:hover {
-    background-color: var(--surface-container-high);
+    font-size: 1.2rem;
 }
 
-/* --- Material Cards (Elevated Surface) --- */
+/* --- Course Card Grid --- */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
 .material-card {
     background-color: var(--surface-container-high);
     border-radius: 12px;
     padding: 16px;
-    margin-bottom: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
 }
+
 .material-card:hover {
+    transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Course Grid Layout (Desktop) --- */
-.course-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+.material-card h3 {
+    color: var(--on-primary-container);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
-/* --- Tabs for Course Details --- */
+.material-card p {
+    color: var(--outline);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* --- Navigation Rail (Sidebar for Mobile/Desktop) --- */
+.navigation-rail {
+    position: fixed;
+    top: 0;
+    left: -80px; /* Initially hidden off-screen */
+    height: 100vh;
+    width: 80px;
+    background-color: var(--surface);
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 64px; /* Space for Top App Bar */
+    transition: left 0.3s ease-in-out;
+    z-index: 1500;
+}
+
+.navigation-rail.open {
+    left: 0; /* Slide in when open on mobile */
+}
+
+.navigation-rail .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 8px 0;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.navigation-rail .nav-item:hover {
+    background-color: var(--surface-container-high);
+}
+
+.navigation-rail .nav-item .material-symbols-outlined {
+    font-size: 24px;
+    margin-bottom: 4px;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.navigation-rail .nav-item .label {
+    font-size: 0.7rem;
+}
+
+/* --- Tab Bar Styling (For Course Details) --- */
 .tab-bar {
     display: flex;
     border-bottom: 2px solid var(--outline);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    margin-top: 20px;
 }
+
 .tab-button {
-    padding: 10px 15px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
     color: var(--outline);
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s ease;
+    font-weight: 500;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
 }
+
 .tab-button.active {
     color: var(--primary);
-    border-bottom: 3px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    font-weight: 600;
 }
+
 .tab-content-item {
     display: none;
+    padding-top: 10px;
 }
+
 .tab-content-item.active {
     display: block;
 }
 
-/* --- Expansion Panel/Accordion (Questions) --- */
+/* --- Expansion Panel (Accordion) Styling --- */
 .expansion-panel {
     border: 1px solid var(--outline);
     border-radius: 8px;
@@ -215,21 +201,29 @@ main {
     overflow: hidden;
     background-color: var(--surface);
 }
+
 .panel-header {
-    padding: 12px 16px;
-    background-color: var(--surface-container-high);
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+    padding: 16px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 600;
+    font-weight: 500;
 }
+
+.panel-header .material-symbols-outlined {
+    transition: transform 0.3s ease-in-out;
+}
+
 .panel-content {
-    padding: 0 16px;
-    max-height: 0;
+    /* Transition setup for the collapsible content */
+    max-height: 0; 
     overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    transition: max-height 0.3s ease-in-out;
 }
+
 .panel-content.open {
     max-height: 1000px; /* Large enough to show all content */
     padding: 16px;
@@ -273,25 +267,11 @@ main {
         height: 100vh;
         width: 80px;
     }
-
-    /* Main content padding for fixed sidebar */
-    main {
+    
+    /* বটম নেভিগেশন বারটি মুছে যাওয়ায়, মেইন কন্টেন্ট এখন বাম দিকে জায়গা নেবে */
+    #main-content {
+        padding-bottom: 0; 
         margin-left: 80px;
         width: calc(100% - 80px);
-    }
-    
-    /* Hide bottom navigation bar */
-    .bottom-navigation {
-        display: none;
-    }
-
-    /* Course Grid on Desktop */
-    .course-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    /* Larger Content Padding */
-    #content-container {
-        padding: 30px;
     }
 }
